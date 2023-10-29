@@ -12,6 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 
 <link rel="stylesheet" type="text/css" href="../css/font-awesome.css">
@@ -91,7 +93,7 @@
      
       <div class="sign-in-container">
         
-        <form>
+        <form action="login.do">
           <h1>가게 로그인</h1>
           <div class="social-links">
             <div>
@@ -103,7 +105,7 @@
           </div>
           <span>LOG-IN</span>
           <input type="text" name="o_id" value="${ param.o_id }" id="o_id" class="input_text" placeholder="아이디를 입력하세요.">
-          <input type="password" name="mem_pwd" value="${ param.mem_pwd }" id="mem_pwd" class="input_text enterMaster" placeholder="비밀번호를 입력하세요.">
+          <input type="password" name="o_pwd" value="${ param.o_pwd }" id="o_pwd" class="input_text enterMaster" placeholder="비밀번호를 입력하세요.">
 
           <button class="form_btn" type="submit" id="login_btn" onclick="send(this.form); return false;">가게로그인</button>
 

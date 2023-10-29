@@ -9,6 +9,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 
 
+ <select id="selectOneFromIdx" parameterType="int"  resultType="EmployeeVo">
+     select * from employee where e_idx=#{ e_idx }
+  </select>
+  
+  <select id="selectOneFromId" parameterType="String"  resultType="EmployeeVo">
+     select * from employee where e_id=#{ e_id }
+  </select>
+
+
  <insert id="insertemployee"  parameterType="EmployeeVo">
   	insert into employee values(seq_employee_e_idx.nextVal,
   	                           #{ e_name },
