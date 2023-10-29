@@ -1,6 +1,5 @@
 # project_alba
-ERD
-<img width="60%" src="https://github.com/kims26/project_alba/assets/114653761/cc51e7d7-e793-4da9-8952-c3043f198d95">
+
 
 ```
 project_alba
