@@ -24,42 +24,42 @@
     <%@ include file="../search/search.jsp" %>
 
   
-<div class="main-banner header-text" id="top">
-    <div class="Modern-Slider">
-      <!-- Item -->
-      <div class="item">
-        <div class="img-fill">
-            <img src="../images/slide-01.jpg" alt="">
-             <div class="text-content">
-            <h3>Welcome To ALBA-STAR</h3>
-              <h5>ALBA - STAR</h5>
+    <div class="main-banner header-text" id="top">
+        <div class="Modern-Slider">
+     
+        <div class="item">
+            <div class="img-fill">
+                <img src="../images/slide-01.jpg" alt="">
+                <div class="text-content">
+                <h3>Welcome To ALBA-STAR</h3>
+                <h5>ALBA - STAR</h5>
+                </div>
             </div>
         </div>
-      </div>
-      
-      <div class="item">
-        <div class="img-fill">
-            <img src="../images/slide-02.jpg" alt="">
-            <div class="text-content">
-              <h3>CALENDER</h3>
-              <h5>사장님과 일정을 공유 해요</h5>
-              <a href="#" class="main-stroked-button">일정 보기</a>
+        
+        <div class="item">
+            <div class="img-fill">
+                <img src="../images/slide-02.jpg" alt="">
+                <div class="text-content">
+                <h3>CALENDER</h3>
+                <h5>사장님과 일정을 공유 해요</h5>
+                <a href="#" class="main-stroked-button">일정 보기</a>
+                </div>
             </div>
         </div>
-      </div>
 
-      <div class="item">
-        <div class="img-fill">
-            <img src="../images/slide-03.jpg" alt="">
-            <div class="text-content">
-                <h3>Board-Go</h3>
-                <h5>일상 공유 해요</h5>
-                <a href="../board/board_list.do" class="main-filled-button">게시판 가기</a>
-              </div>
+        <div class="item">
+            <div class="img-fill">
+                <img src="../images/slide-03.jpg" alt="">
+                <div class="text-content">
+                    <h3>Board-Go</h3>
+                    <h5>일상 공유 해요</h5>
+                    <a href="../board/board_list.do" class="main-filled-button">게시판 가기</a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-</div>
+        </div>
+    </div> 
 
 <section class="section" id="testimonials">
     <div class="container">
@@ -101,7 +101,7 @@
         </div>
     </div>
 </section>
-<!-- jQuery -->
+
 <script src="../js/jquery-2.1.0.min.js"></script>
 
 <!-- Bootstrap -->

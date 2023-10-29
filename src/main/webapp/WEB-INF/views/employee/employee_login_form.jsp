@@ -7,11 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>직원 로그인 폼</title>
     <link rel="stylesheet" type="text/css" href="../login_css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.css">
 </head>
 <body>
     <div class="wrapper">
-        <div class="container">
-          <div class="sign-up-container">
+        <div class="container1">
+          <div class="sign-in-container">
             <form>
               <h1>직원 회원가입</h1>
               <div class="social-links">
@@ -37,10 +43,10 @@
                     <a href="../employee/insert_form.do"><i class="fa fa-plus" aria-hidden="true"></i></a>
                 </div>
               </div>
-              <span>회원가입</span>
+              <span>LOG-IN</span>
               <input type="email" placeholder="Email">
               <input type="password" placeholder="Password">
-              <button class="form_btn">Log-In</button>
+              <button class="form_btn">직원로그인</button>
             </form>
           </div>
           <div class="overlay-container">

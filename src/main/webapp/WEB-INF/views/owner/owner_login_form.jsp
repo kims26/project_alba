@@ -6,27 +6,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>사장님 로그인 폼</title>
+    
     <link rel="stylesheet" type="text/css" href="../login_css/login.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+
+<link rel="stylesheet" type="text/css" href="../css/font-awesome.css">
+
+
+<link rel="stylesheet" href="../headercss/header.css">
+
+    <script type="text/javascript">
+   
+      function send(f){
+        
+        var o_id	= f.o_id.value.trim();
+        var o_pwd	= f.o_pwd.value.trim();
+        
+        if(o_id==''){
+          
+          alert('아이디를 입력하세요');
+          f.o_id.value='';
+          f.o_id.focus();
+          return;
+        }
+        
+        if(o_pwd==''){
+          
+          alert('비밀번호를 입력하세요');
+          f.o_pwd.value='';
+          f.o_pwd.focus();
+          return;
+        }
+        
+        //전송
+        f.action = "login.do";//MemberLoginAction
+        f.submit();
+        
+      }
+   </script>
+
+<script type="text/javascript">
+    
+  //jQuery초기화 이벤트
+  $(document).ready(function(){
+      
+      // 0.1초후에 호출 : 로그인폼 show된후에 호출
+      setTimeout(show_message,100);
+      //show_message();
+      
+  });
+  
+  function show_message(){
+
+      
+      //login_form.do?reason=fail_id
+      if("${ param.reason eq 'fail_id' }" == "true"){
+          alert('아이디가 없습니다.'); 
+      }
+      
+      //login_form.do?reason=fail_pwd
+      if("${ param.reason eq 'fail_pwd' }" == "true"){
+          alert('비밀번호가 틀렸습니다.'); 
+      }		   
+      
+      //login_form.do?reason=fail_session_timeout
+      if("${ param.reason eq 'fail_session_timeout' }" == "true"){
+              alert('로그아웃되었습니다\n로그인후에 이용하세요.'); 
+      }		   
+      
+  }
+  
+  
+</script>
 </head>
 <body>
+  
   <div class="wrapper">
-    <div class="container">
-      <div class="sign-up-container">
-        <form>
-          <h1>가게 회원가입</h1>
-          <div class="social-links">
-            <div>
-              <a href="../main/main.do"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
-            </div>
-          </div>
-          <span>회원가입</span>
-          <input type="text" placeholder="Name">
-          <input type="email" placeholder="Email">
-          <input type="password" placeholder="Password">
-          <button class="form_btn">Sign Up</button>
-        </form>
-      </div>
+   
+    <div class="container1">
+     
       <div class="sign-in-container">
+        
         <form>
           <h1>가게 로그인</h1>
           <div class="social-links">
@@ -37,11 +101,14 @@
               <a href="../owner/insert_form.do"><i class="fa fa-plus" aria-hidden="true"></i></a>
             </div>
           </div>
-          <span>회원가입</span>
-          <input type="email" placeholder="Email">
-          <input type="password" placeholder="Password">
-          <button class="form_btn">Log-In</button>
+          <span>LOG-IN</span>
+          <input type="text" name="o_id" value="${ param.o_id }" id="o_id" class="input_text" placeholder="아이디를 입력하세요.">
+          <input type="password" name="mem_pwd" value="${ param.mem_pwd }" id="mem_pwd" class="input_text enterMaster" placeholder="비밀번호를 입력하세요.">
+
+          <button class="form_btn" type="submit" id="login_btn" onclick="send(this.form); return false;">가게로그인</button>
+
         </form>
+
       </div>
       <div class="overlay-container">
         <div class="overlay-left">
@@ -57,6 +124,12 @@
       </div>
     </div>
   </div>
+  
+
     <script src="../js/login.js"></script>
+  
 </body>
 </html>
+
+
+
