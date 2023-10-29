@@ -12,5 +12,9 @@ public interface OwnerDao {
      public List<OwnerVo> selectList();
 
      public int insertOwner(OwnerVo vo);
+
+     public OwnerVo selectOneFromIdx(int o_idx);
+
+     public OwnerVo selectOneFromId(String o_id);
     
 }

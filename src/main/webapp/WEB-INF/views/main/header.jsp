@@ -14,11 +14,15 @@
 
     <link rel="stylesheet" type="text/css" href="../css/font-awesome.css">
 
-    <link rel="stylesheet" href="../css/templatemo-breezed.css">
+    <!-- <link rel="stylesheet" href="../css/templatemo-breezed.css"> -->
 
-    <link rel="stylesheet" href="../css/owl-carousel.css">
+    <!-- <link rel="stylesheet" href="../css/owl-carousel.css"> -->
 
-    <link rel="stylesheet" href="../css/lightbox.css">
+    <!-- <link rel="stylesheet" href="../css/lightbox.css"> -->
+
+    <link rel="stylesheet" href="../headercss/header.css">
+
+
 </head>
 
 <body>

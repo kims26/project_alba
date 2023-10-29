@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="alba.alba_10_26.dao.EmployeeDao">
+
+<select id="selectList" resultType="EmployeeVo">
+    select * from employee order by e_idx
+</select>
+
+
+ <insert id="insertemployee"  parameterType="EmployeeVo">
+  	insert into employee values(seq_employee_e_idx.nextVal,
+  	                           #{ e_name },
+                               #{ e_email },
+  	                           #{ e_id },
+  	                           #{ e_pwd },
+  	                           #{ e_addr },
+  	                           #{ e_add_addr },
+                               #{ e_tel }
+                              )
+  
+  </insert>
+  
+</mapper>
+
+
+
+
+
+
+
