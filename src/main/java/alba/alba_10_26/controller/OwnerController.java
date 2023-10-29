@@ -33,7 +33,7 @@ public class OwnerController {
 		this.ownerDao = ownerDao;
 	}
 
-	@RequestMapping(value = "/member/check_o_id.do", produces = "application/json;charset=utf-8;")
+	@RequestMapping(value = "/owner/check_o_id.do", produces = "application/json;charset=utf-8;")
 	@ResponseBody
 	public Map<String, Boolean> check_o_id(String o_id) {
 
@@ -52,7 +52,7 @@ public class OwnerController {
 	}
 
 
-	@RequestMapping(value = "/member/check_pwd.do", produces = "application/json;charset=utf-8;")
+	@RequestMapping(value = "/owner/check_pwd.do", produces = "application/json;charset=utf-8;")
 	@ResponseBody
 	public Map<String, Boolean> check_pwd(String o_pwd) {
 
@@ -101,6 +101,7 @@ public class OwnerController {
 
 		return "owner/owner_login_form";
 	}
+	
 	@RequestMapping("/owner/login.do")
 	public String login(String o_id, String o_pwd, RedirectAttributes ra) {
 
@@ -113,7 +114,7 @@ public class OwnerController {
 		if (owner.getO_pwd().equals(o_pwd) == false) {
 
 			ra.addAttribute("reason", "fail_pwd");
-			ra.addAttribute("o_id", "mem_id");
+			ra.addAttribute("o_id", "o_id");
 			return "redirect:login_form.do";
 		}
 
@@ -122,7 +123,7 @@ public class OwnerController {
 		}
 
 		session.setAttribute("owner", owner);
-		return "redirect:../";
+		return "redirect:../main/main.do";
 	}
 
 	@RequestMapping("/owner/logout.do")

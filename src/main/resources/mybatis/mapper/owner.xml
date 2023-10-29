@@ -10,6 +10,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 
 
+ <select id="selectOneFromIdx" parameterType="int"  resultType="OwnerVo">
+     select * from owner where o_idx=#{ o_idx }
+  </select>
+  
+  <select id="selectOneFromId" parameterType="String"  resultType="OwnerVo">
+     select * from owner where o_id=#{ o_id }
+  </select>
+
+
  <insert id="insertOwner"  parameterType="OwnerVo">
   	insert into owner values(seq_owner_o_idx.nextVal,
   	                           #{ o_name },

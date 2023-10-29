@@ -35,8 +35,6 @@
                         <a href="../main/main.do" class="logo">
                             .alba_star
                         </a>
-                        <!-- ***** Logo End ***** -->
-                        <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="../main/main.do" class="active">Home</a></li>
                             <li class="submenu">
@@ -49,13 +47,56 @@
                             </li>
                             <li class="scroll-to-section"><a href="../board/board_list.do">게시판</a></li>
                             <li class="scroll-to-section"><a href="#projects">일정</a></li>
-                            <li class="scroll-to-section"><a href="../owner/login_form.do">Log-In</a></li> 
+
+                            <li class="scroll-to-section">
+                                 <c:if
+                                    test="${ empty sessionScope.member && empty sessionScope.owner }">
+                                        <a href="../employee/login_form.do">Log-in</a>
+                                </c:if>
+                            </li>
+
+                            <li class="scroll-to-section"> 
+                                <c:if test="${ not empty sessionScope.owner }">                               
+                                    <a href="../owner/logout.do">로그아웃</a>
+                                </c:if>
+                             </li>
+
+                             <li>
+                             <c:if test="${ not empty sessionScope.owner }">
+                                <span class="scroll-to-section">
+                                    <a>
+                                        ${sessionScope.owner.o_name}
+                                        사장님 환영합니다
+                                    </a>
+                                </span>
+                                </c:if>  
+                             </li>
+                             <li class="scroll-to-section"> 
+                                <c:if test="${ not empty sessionScope.member }">                               
+                                    <a href="../employee/logout.do">로그아웃</a>
+                                </c:if>
+                             </li>
+
+                             <li>
+                             <c:if test="${ not empty sessionScope.member }">
+                                <span class="scroll-to-section">
+                                    <a>
+                                        ${sessionScope.member.e_name}
+                                        직원님 환영합니다
+                                    </a>
+                                </span>
+                                </c:if>  
+                             </li>
+
+                             <!-- <li>
+                             <c:if test="${ not empty sessionScope.member }">
+                                <span class="scroll-to-section"><b>${ sessionScope.member.e_name }</b>직원님 환영합니다</span>
+                                <div class="scroll-to-section">
+                                    <a href="../employee/logout.do" class="login_btn">로그아웃</a>
+                                </div>
+                                </c:if>
+                            </li> -->
                         </ul>       
-                         
-                        <!-- <a class='menu-trigger'>
-                            <span>Menu</span>
-                        </a> -->
-                        <!-- ***** Menu End ***** -->
                     </nav>
                 </div>
             </div>
