@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import alba.alba_10_26.dao.EmployeeDao;
 import alba.alba_10_26.dao.OwnerDao;
+
 import alba.alba_10_26.vo.OwnerVo;
 
 @Controller
@@ -27,6 +29,8 @@ public class OwnerController {
 	HttpSession session;
 
 	OwnerDao ownerDao;
+
+	
 
    
 	public OwnerController(OwnerDao ownerDao) {
@@ -73,9 +77,11 @@ public class OwnerController {
     @RequestMapping("/owner/list.do")
 	public String list(Model model) {
 
-		List<OwnerVo> list = ownerDao.selectList();
+		List<OwnerVo> list 	= ownerDao.selectList();
+		// List<EmployeeVo> e_list = employeeDao.selectList();
 
 		model.addAttribute("list", list);
+		// model.addAttribute("e_list", e_list);
 
 		return "owner/owner_list";
 	}
@@ -151,5 +157,42 @@ public class OwnerController {
 
 		return map;
 	}
+
+	@RequestMapping("/owner/modify_form.do")
+	public String modify_form(int o_idx, Model model) {
+
+		OwnerVo vo = ownerDao.selectOneFromIdx(o_idx);
+
+		model.addAttribute("vo", vo);
+
+		return "owner/owner_modify_form";
+	}
+
+	@RequestMapping("/owner/modify.do")
+	public String modify(OwnerVo vo, RedirectAttributes ra) {
+
+		// 5.DB update
+		int res = ownerDao.update(vo);
+		if (res == 0) {
+		}
+
+		return "redirect:../main/main.do";
+	}
+
+	@RequestMapping("/owner/delete.do")
+	public String delete(int o_idx){
+
+		int res = ownerDao.delete(o_idx);
+		if(res==0){
+		}
+		OwnerVo ownerVo = (OwnerVo) session.getAttribute("owner");
+		if (ownerVo.getO_idx() == o_idx) {
+
+			return "redirect:logout.do";
+		}
+
+		return "redirect:../main/main.do";
+	}
+
     
 }

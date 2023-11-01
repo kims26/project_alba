@@ -32,6 +32,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                               )
 
   </insert>
+
+  <update id="update" parameterType="OwnerVo">
+    update owner set o_name=#{ o_name },
+  	                   o_pwd=#{ o_pwd },
+                       o_addr=#{ o_addr },
+                       o_add_addr=#{ o_add_addr}
+	 where o_idx=#{ o_idx }
+</update>
+
+<delete id="delete" parameterType="int">
+    delete from owner where o_idx=#{ o_idx }
+</delete>
   
 </mapper>
 

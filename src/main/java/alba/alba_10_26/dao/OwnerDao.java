@@ -16,5 +16,9 @@ public interface OwnerDao {
      public OwnerVo selectOneFromIdx(int o_idx);
 
      public OwnerVo selectOneFromId(String o_id);
+
+     public int update(OwnerVo vo);
+
+     public int delete(int o_idx);
     
 }

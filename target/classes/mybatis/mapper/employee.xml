@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>
 
 
- <insert id="insertemployee"  parameterType="EmployeeVo">
+ <insert id="insertEmployee"  parameterType="EmployeeVo">
   	insert into employee values(seq_employee_e_idx.nextVal,
   	                           #{ e_name },
                                #{ e_email },
@@ -30,6 +30,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                               )
   
   </insert>
+
+   <update id="update" parameterType="EmployeeVo">
+    update employee set e_name=#{ e_name },
+  	                   e_pwd=#{ e_pwd },
+                       e_addr=#{ e_addr },
+                       e_add_addr=#{ e_add_addr}
+	 where e_idx=#{ e_idx }
+</update>
   
 </mapper>
 

@@ -9,7 +9,7 @@ public class EmployeeVo {
 
     int e_idx;
     String e_name;
-    String email;
+    String e_email;
     String e_id;
     String e_pwd;
     String e_addr;

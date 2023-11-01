@@ -86,7 +86,8 @@
 </script>
 </head>
 <body>
-  
+ 
+  <%@ include file="../main/header.jsp" %>
   <div class="wrapper">
    
     <div class="container1">
@@ -129,6 +130,8 @@
   
 
     <script src="../js/login.js"></script>
+
+   
   
 </body>
 </html>
