@@ -14,8 +14,13 @@
 </head>
 
 <body>
-    <%@ include file="../header.jsp" %>
-    게시판s
+    <%@ include file="../main/header.jsp" %>
+
+    <div class="content">
+        안녕하세요
+    </div>
+
+   
 </body>
 </html>
 

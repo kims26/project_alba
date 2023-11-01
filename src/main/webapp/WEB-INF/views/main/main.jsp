@@ -8,137 +8,206 @@
     <title>메인페이지</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
 
-    <link rel="stylesheet" type="text/css" href="../css/font-awesome.css">
+    <link rel="stylesheet" href="../assets/css/main.css" />
 
-    <link rel="stylesheet" href="../css/templatemo-breezed.css">
+    
+   
+    <script type="text/javascript">
 
-    <link rel="stylesheet" href="../css/owl-carousel.css">
+   
+    
+    </script>
+    
 
-    <link rel="stylesheet" href="../css/lightbox.css">
    
 </head>
-<body>
-    <%@ include file="header.jsp" %>
-    <%@ include file="../search/search.jsp" %>
+
+<body class="homepage is-preload">
 
   
-    <div class="main-banner header-text" id="top">
-        <div class="Modern-Slider">
-     
-        <div class="item">
-            <div class="img-fill">
-                <img src="../images/slide-01.jpg" alt="">
-                <div class="text-content">
-                <h3>Welcome To ALBA-STAR</h3>
-                <h5>ALBA - STAR</h5>
-                </div>
-            </div>
-        </div>
-        
-        <div class="item">
-            <div class="img-fill">
-                <img src="../images/slide-02.jpg" alt="">
-                <div class="text-content">
-                <h3>CALENDER</h3>
-                <h5>사장님과 일정을 공유 해요</h5>
-                <a href="#" class="main-stroked-button">일정 보기</a>
-                </div>
-            </div>
-        </div>
+    <div id="page-wrapper">
 
-        <div class="item">
-            <div class="img-fill">
-                <img src="../images/slide-03.jpg" alt="">
-                <div class="text-content">
-                    <h3>Board-Go</h3>
-                    <h5>일상 공유 해요</h5>
-                    <a href="../board/board_list.do" class="main-filled-button">게시판 가기</a>
-                </div>
-            </div>
-        </div>
-        </div>
-    </div> 
-
-<section class="section" id="testimonials">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-lg-12">
-                <div class="section-heading">
-                    <h6>가게이름</h6>
-                    <h2>members</h2>
-                </div>
-            </div>
-
-            <div class="col-lg-12 col-md-12 col-sm-12 mobile-bottom-fix-big" data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
+        <!-- Header -->
+            <div id="header">
                
-                <div class="owl-carousel owl-theme">
-                    <div class="item author-item">
+                    <div class="inner">
+                        <header>
+                            <h1><a href="main.do" id="logo">alba_star</a></h1>
+                            <hr />
+                            <p>ALBA-Star-Application</p>
+                        </header>
+                        <footer>
+                            <a href="main.do" class="button circled scrolly">Start</a>
+                        </footer>
+                    </div>
+                    <nav id="nav">
+                        <ul>
+                            <li><a href="main.do">Home</a></li>
+                            <li>
+                                <a href="../board/board_list.do">게시판</a>
+                            </li>
 
-                        <div class="member-thumb">
-                            <img src="../images/member-item-01.jpg" alt="">
-                            <div class="hover-effect">
-                                <div class="hover-content">
-                                    <ul>
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                           
+
+                            <li><a href="../calender/list.do">일정</a></li>
+
+                            <li><a href="left-sidebar.html">소통방</a></li>
+
+                           
+
+                            <li > 
+                                <c:if test="${ not empty sessionScope.owner }">                               
+                                    <a href="../owner/list.do">사장님</a>
+                                </c:if>
+
+                                <c:if test="${ not empty sessionScope.member }">                               
+                                    <a href="../employee/list.do">알바생</a>
+                                </c:if>
+                            </li>
+                          
+                            <li >
+                                <c:if
+                                test="${ empty sessionScope.member && empty sessionScope.owner }">
+                                    <a href="../employee/login_form.do">로그인</a>
+                            </c:if>
+
+                            <c:if test="${ not empty sessionScope.owner }">                               
+                                <a href="../owner/logout.do">로그아웃</a>
+
+                             
+                              
+                            </c:if>
+
+                            <c:if test="${ not empty sessionScope.member }">                               
+                                <a href="../employee/logout.do">로그아웃</a>
+                            </c:if>
+
+                        </li>
+
+                        <!-- <li > 
+                            <c:if test="${ not empty sessionScope.owner }">                               
+                                <a href="../owner/logout.do">로그아웃</a>
+                            </c:if>
+                        </li> -->
+
+                        <!-- <li>
+                            <c:if test="${ not empty sessionScope.owner }">
+                            <span >
+                                <a>
+                                    ${sessionScope.owner.o_name}
+                                    사장님 환영합니다
+                                </a>
+                            </span>
+                            </c:if>  
+                            </li> -->
+
+                            <!-- <li > 
+                                <c:if test="${ not empty sessionScope.member }">                               
+                                    <a href="../employee/logout.do">로그아웃</a>
+                                </c:if>
+                            </li> -->
+
+                            <li>
+                                <c:if test="${ not empty sessionScope.member }">
+                                    <span >
+                                        <a>
+                                            <a onclick="location.href='../employee/modify_form.do?e_idx='+'${member.e_idx}'"> ${sessionScope.member.e_name}
+                                                님 환영합니다</a>
+                                        </a>
+                                    </span>
+                                </c:if> 
+
+                                <c:if test="${ not empty sessionScope.owner }">
+                                    <span >
+                                        <a>
+                                            <a onclick="location.href='../owner/modify_form.do?o_idx='+'${owner.o_idx}'"> ${sessionScope.owner.o_name}
+                                                님 환영합니다</a>
+                                        </a>
+                                    </span>
+                                    </c:if> 
+
+                                </li>
+
+                                <!-- <li>
+                                    <c:if test="${ not empty sessionScope.member }">
+                                    <span>
+                                        <a>
+                                            <a onclick="location.href='../employee/modify_form.do?e_idx='+'${member.e_idx}'">마이페이지</a>
+                                        </a>
+                                    </span>
+                                    </c:if> 
+    
+                                    <c:if test="${ not empty sessionScope.owner }">
+                                        <span >
+                                            <a>
+                                                <a onclick="location.href='../owner/modify_form.do?o_idx='+'${owner.o_idx}'">마이페이지</a>
+                                            </a>
+                                        </span>
+                                        </c:if> 
+    
+                                    </li> -->
+
+            
+                        </ul>
+                    </nav>
+            </div>
+            
+
+          
+
+              
+                    
+        <!-- Footer -->
+            <div id="footer">
+                <div class="container">
+                    <hr />
+                    <div class="row">
+                        <div class="col-12">
+
+                            <!-- Contact -->
+                                <section class="contact">
+                                    <header>
+                                        <h3>Nisl turpis nascetur interdum?</h3>
+                                    </header>
+                                    <p>Urna nisl non quis interdum mus ornare ridiculus egestas ridiculus lobortis vivamus tempor aliquet.</p>
+                                    <ul class="icons">
+                                        <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+                                        <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+                                        <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                                        <li><a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a></li>
+                                        <li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+                                        <li><a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a></li>
+                                    </ul>
+                                </section>
+
+                            <!-- Copyright -->
+                                <div class="copyright">
+                                    <ul class="menu">
+                                        <li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
                                     </ul>
                                 </div>
-                            </div>
+
                         </div>
 
-                        <h4>이름</h4>
-                        <span>포지션</span>
                     </div>
                 </div>
-
             </div>
 
-        </div>
     </div>
-</section>
 
-<script src="../js/jquery-2.1.0.min.js"></script>
+    <!-- Scripts -->
+        <script src="../assets/js/jquery.min.js"></script>
+        <script src="../assets/js/jquery.dropotron.min.js"></script>
+        <script src="../assets/js/jquery.scrolly.min.js"></script>
+        <script src="../assets/js/jquery.scrollex.min.js"></script>
+        <script src="../assets/js/browser.min.js"></script>
+        <script src="../assets/js/breakpoints.min.js"></script>
+        <script src="../assets/js/util.js"></script>
+        <script src="../assets/js/main.js"></script>
 
-<!-- Bootstrap -->
-<script src="../js/popper.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-
-<!-- Plugins -->
-<script src="../js/owl-carousel.js"></script>
-<script src="../js/scrollreveal.min.js"></script>
-<script src="../js/waypoints.min.js"></script>
-<script src="../js/jquery.counterup.min.js"></script>
-<script src="../js/imgfix.min.js"></script> 
-<script src="../js/slick.js"></script> 
-<script src="../js/lightbox.js"></script> 
-<script src="../js/isotope.js"></script> 
-
-<!-- Global Init -->
-<script src="/js/custom.js"></script>
-
-<script>
-
-    $(function() {
-        var selectedClass = "";
-        $("p").click(function(){
-        selectedClass = $(this).attr("data-rel");
-        $("#portfolio").fadeTo(50, 0.1);
-            $("#portfolio div").not("."+selectedClass).fadeOut();
-        setTimeout(function() {
-          $("."+selectedClass).fadeIn();
-          $("#portfolio").fadeTo(50, 1);
-        }, 500);
-            
-        });
-    });
-
-</script>
-
-<%@ include file="footer.jsp" %>
 </body>
+  
+
 </html>

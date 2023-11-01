@@ -1,105 +1,95 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>메인페이지</title>
+    <title>Header</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900&display=swap">
+    <style>
+        /* 헤더 스타일링 */
+        header {
+            background-color: white;
+            color: #000;
+            padding: 10px;
+            text-align: center;
+            max-width: 100%;
+            margin: 0 auto;
+        }
 
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+        #nav {
+            color: black;
+            text-align: center;
+            max-width: 100%;
+            margin: 0 auto;
+        }
 
+        ul {
+            list-style: none;
+            padding: 0;
+        }
 
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+        li {
+            display: inline;
+            margin-right: 20px;
+        }
 
-    <link rel="stylesheet" type="text/css" href="../css/font-awesome.css">
-
-    <!-- <link rel="stylesheet" href="../css/templatemo-breezed.css"> -->
-
-    <!-- <link rel="stylesheet" href="../css/owl-carousel.css"> -->
-
-    <!-- <link rel="stylesheet" href="../css/lightbox.css"> -->
-
-    <link rel="stylesheet" href="../headercss/header.css">
-
-
+        a {
+            text-decoration: none;
+            color: black;
+            font-size: 18px;
+            margin-right: 30px;
+            line-height: 4.0; /* 링크 텍스트를 세로로 조금 아래로 이동합니다. */
+        }
+    </style>
 </head>
 
 <body>
-    <header class="header-area header-sticky">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="main-nav">
-                        <!-- ***** Logo Start ***** -->
-                        <a href="../main/main.do" class="logo">
-                            .alba_star
-                        </a>
-                        <ul class="nav">
-                            <li class="scroll-to-section"><a href="../main/main.do" class="active">Home</a></li>
-                            <li class="submenu">
-                                <a href="javascript:;">알바생</a>
-                                <ul>
-                                    <li><a href="">급여</a></li>
-                                    <li><a href="">출퇴근기록</a></li>
-                                    <li><a href="">My-Page</a></li>
-                                </ul>
-                            </li>
-                            <li class="scroll-to-section"><a href="../board/board_list.do">게시판</a></li>
-                            <li class="scroll-to-section"><a href="#projects">일정</a></li>
-
-                            <li class="scroll-to-section">
-                                 <c:if
-                                    test="${ empty sessionScope.member && empty sessionScope.owner }">
-                                        <a href="../employee/login_form.do">Log-in</a>
-                                </c:if>
-                            </li>
-
-                            <li class="scroll-to-section"> 
-                                <c:if test="${ not empty sessionScope.owner }">                               
-                                    <a href="../owner/logout.do">로그아웃</a>
-                                </c:if>
-                             </li>
-
-                             <li>
-                             <c:if test="${ not empty sessionScope.owner }">
-                                <span class="scroll-to-section">
-                                    <a>
-                                        ${sessionScope.owner.o_name}
-                                        사장님 환영합니다
-                                    </a>
-                                </span>
-                                </c:if>  
-                             </li>
-                             <li class="scroll-to-section"> 
-                                <c:if test="${ not empty sessionScope.member }">                               
-                                    <a href="../employee/logout.do">로그아웃</a>
-                                </c:if>
-                             </li>
-
-                             <li>
-                             <c:if test="${ not empty sessionScope.member }">
-                                <span class="scroll-to-section">
-                                    <a>
-                                        ${sessionScope.member.e_name}
-                                        직원님 환영합니다
-                                    </a>
-                                </span>
-                                </c:if>  
-                             </li>
-
-                             <!-- <li>
-                             <c:if test="${ not empty sessionScope.member }">
-                                <span class="scroll-to-section"><b>${ sessionScope.member.e_name }</b>직원님 환영합니다</span>
-                                <div class="scroll-to-section">
-                                    <a href="../employee/logout.do" class="login_btn">로그아웃</a>
-                                </div>
-                                </c:if>
-                            </li> -->
-                        </ul>       
-                    </nav>
-                </div>
-            </div>
+    <header>
+        <div class="inner">
+            <nav id="nav">
+                <ul>
+                    <li><a href="../main/main.do">Home</a></li>
+                    <li><a href="../board/board_list.do">게시판</a></li>
+                    <li><a href="../calender/list.do">일정</a></li>
+                    <li><a href="left-sidebar.html">소통방</a></li>
+                    <li>
+                        <c:if test="${not empty sessionScope.owner}">
+                            <a href="../owner/list.do">사장님</a>
+                        </c:if>
+                        <c:if test="${not empty sessionScope.member}">
+                            <a href="../employee/list.do">알바생</a>
+                        </c:if>
+                    </li>
+                    <li>
+                        <c:if test="${empty sessionScope.member && empty sessionScope.owner}">
+                            <a href="../employee/login_form.do">로그인</a>
+                        </c:if>
+                        <c:if test="${not empty sessionScope.owner}">
+                            <a href="../owner/logout.do">로그아웃</a>
+                        </c:if>
+                        <c:if test="${not empty sessionScope.member}">
+                            <a href="../employee/logout.do">로그아웃</a>
+                        </c:if>
+                    </li>
+                    <li>
+                        <c:if test="${not empty sessionScope.member}">
+                            <span>
+                                <a onclick="location.href='../employee/modify_form.do?e_idx=${member.e_idx}'">
+                                    ${sessionScope.member.e_name} 님 환영합니다
+                                </a>
+                            </span>
+                        </c:if>
+                        <c:if test="${not empty sessionScope.owner}">
+                            <span>
+                                <a onclick="location.href='../owner/modify_form.do?o_idx=${owner.o_idx}'">
+                                    ${sessionScope.owner.o_name} 님 환영합니다
+                                </a>
+                            </span>
+                        </c:if>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </header>
 </body>

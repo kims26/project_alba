@@ -15,4 +15,5 @@ public class OwnerVo {
     String o_add_addr;
     String o_tel;
     String o_storee;
+    int e_idx;
 }

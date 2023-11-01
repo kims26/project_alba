@@ -17,5 +17,7 @@ public interface EmployeeDao {
      public EmployeeVo selectOneFromIdx(int e_idx);
 
      public EmployeeVo selectOneFromId(String e_id);
+
+     public int update(EmployeeVo vo);
     
 }

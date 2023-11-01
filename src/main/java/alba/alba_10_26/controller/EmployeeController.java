@@ -19,6 +19,7 @@ import alba.alba_10_26.vo.EmployeeVo;
 import alba.alba_10_26.vo.OwnerVo;
 
 
+
 @Controller
 public class EmployeeController {
 
@@ -79,7 +80,7 @@ public class EmployeeController {
 
 		model.addAttribute("list", list);
 
-		return "owner/owner_list";
+		return "employee/employee_list";
 	}
 
    
@@ -154,6 +155,30 @@ public class EmployeeController {
 
 		return map;
 	}
+
+
+	@RequestMapping("/employee/modify_form.do")
+	public String modify_form(int e_idx, Model model) {
+
+		EmployeeVo vo = employeeDao.selectOneFromIdx(e_idx);
+
+		model.addAttribute("vo", vo);
+
+		return "employee/employee_modify_form";
+	}
+
+	@RequestMapping("/employee/modify.do")
+	public String modify(EmployeeVo vo, RedirectAttributes ra) {
+
+		// 5.DB update
+		int res = employeeDao.update(vo);
+		if (res == 0) {
+		}
+
+		return "redirect:../main/main.do";
+	}
+
+
 
 
     
