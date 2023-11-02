@@ -77,9 +77,12 @@
       }		   
       
   }
+
   
   
 </script>
+
+
 </head>
 <body>
   <%@ include file="../main/header.jsp" %>
@@ -94,10 +97,10 @@
               <h1>직원 로그인</h1>
               <div class="social-links">
                 <div>
-                    <a href="../main/main.do"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+                    <a href="../main/main.do" class="link-icon"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
                 </div>
                 <div>
-                    <a href="../employee/insert_form.do"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                    <a href="../employee/insert_form.do" class="link-icon"><i class="fa fa-plus" aria-hidden="true"></i></a>
                 </div>
               </div>
               <span>LOG-IN</span>

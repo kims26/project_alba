@@ -13,6 +13,7 @@ public class BoardVo {
     String b_create_date;
     String b_update_date;
     int b_view_cnt;
-    int m_idx;
+    int e_idx;
+    String e_name;
     
 }
