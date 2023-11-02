@@ -4,8 +4,85 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="alba.alba_10_26.dao.BoardDao">
 
-<select id="selectList" resultType="BoardVo">
-    select * from Board order by b_idx
-</select>
-  
+  <select id="selectList" resultType="BoardVo">
+    SELECT * FROM board ORDER BY b_idx
+  </select>
+
+  <select id="selectConditionList" parameterType="java.util.Map" resultType="BoardVo">
+    SELECT * FROM (
+      SELECT
+        row_number() over(ORDER BY b_idx) as no,
+        row_number() over(ORDER BY b_idx DESC) as no2,
+        b.*
+      FROM (
+        SELECT * FROM board
+        <!-- Dynamic Query -->
+        <trim prefix="WHERE" prefixOverrides="OR">
+          <!-- 제목 검색 -->
+          <if test="title != null">
+            b_title LIKE '%' || #{title} || '%'
+          </if>
+          <!-- 내용 검색 -->
+          <if test="contents != null">
+            OR b_contents LIKE '%' || #{contents} || '%'
+          </if>
+          <!-- 이름 검색 -->
+          <if test="name != null">
+            OR e_name LIKE '%' || #{name} || '%'
+          </if>
+        </trim>
+      ) b
+    ) WHERE no2 BETWEEN #{start} AND #{end}
+    ORDER BY no DESC
+  </select>
+
+  <select id="selectRowTotal" parameterType="java.util.Map" resultType="int">
+    SELECT NVL(COUNT(*), 0) FROM board
+    <trim prefix="WHERE" prefixOverrides="OR">
+      <!-- 제목 검색 -->
+      <if test="title != null">
+        b_title LIKE '%' || #{title} || '%'
+      </if>
+      <!-- 내용 검색 -->
+      <if test="contents != null">
+        OR b_contents LIKE '%' || #{contents} || '%'
+      </if>
+      <!-- 이름 검색 -->
+      <if test="name != null">
+        OR e_name LIKE '%' || #{name} || '%'
+      </if>
+    </trim>
+  </select>
+
+  <select id="selectOne" parameterType="int" resultType="BoardVo">
+    SELECT * FROM board WHERE b_idx = #{b_idx}
+  </select>
+
+  <update id="update_readhit" parameterType="int">
+    UPDATE board SET b_view_cnt = b_view_cnt + 1 WHERE b_idx = #{b_idx}
+  </update>
+
+ <insert id="insertBoard" parameterType="BoardVo">
+    insert into board (
+        b_idx, 
+        b_title,
+        b_contents,
+        b_create_date,
+        b_update_date,
+        b_view_cnt,
+        e_idx,
+        e_name
+    ) values (
+        seq_board_b_idx.nextVal, 
+        #{b_title},
+        #{b_contents},
+        sysdate,                
+        sysdate,
+        #{b_view_cnt},
+        #{e_idx},
+        #{e_name}
+    )
+</insert>
+
+
 </mapper>

@@ -15,6 +15,4 @@ public class EmployeeVo {
     String e_addr;
     String e_add_addr;
     String e_tel;
-    
-
 }
