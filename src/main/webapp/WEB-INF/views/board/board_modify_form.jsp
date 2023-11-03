@@ -49,7 +49,7 @@
                 f.b_contents.focus();
                 return;
             }
-            f.action = "insert.do";
+            f.action = "modify.do";
             f.submit();
         }
     </script>
@@ -60,20 +60,27 @@
 
     <h1 class="text-center">게시판</h1>
 
-    <!-- 게시글 작성 양식 -->
+   
     <div class="center-form">
         <h2>게시글 작성</h2>
-        <form method="post" style="width: 80%;"> <!-- 폼의 너비를 조정합니다 (예: 80%) -->
+        <form method="post" style="width: 80%;"> 
+            <input type="hidden" name="b_idx" value="${ vo.b_idx }">
+            <input type="hidden" name="page" value="${ param.page }">
+            <input type="hidden" name="search" value="${ param.search }">
+            <input type="hidden" name="search_text" value="${ param.search_text }">
             <div class="form-group">
                 <label for="b_title">제목:</label>
-                <input type="text" id="b_title" name="b_title" class="form-control">
+                <input type="text" id="b_title" name="b_title" class="form-control" value="${vo.b_title}" >
             </div>
             <div class="form-group">
                 <label for="b_contents">내용:</label>
-                <textarea id="b_contents" name="b_contents" class="form-control" rows="5"></textarea>
+                <textarea id="b_contents" name="b_contents" class="form-control" rows="5" >${vo.b_contents}</textarea>
             </div>
             <br>
-            <button class="btn btn-primary" type="button" onclick="send(this.form)">새글쓰기</button>
+            <button class="btn btn-primary" type="button" onclick="send(this.form)">수정하기</button>
+
+            <input class="btn btn-success" type="button" value="목록보기"
+            onclick="location.href='board_list.do?page=${param.page}&search=${param.search}&search_text=${param.search_text}'">
         </form>
     </div>
 </body>

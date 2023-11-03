@@ -58,6 +58,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     SELECT * FROM board WHERE b_idx = #{b_idx}
   </select>
 
+   <!-- <select id="selectComment" parameterType="int" resultType="int">
+   select count(*) as comment_count from com where b_idx=#{b_idx}
+  
+  </select> -->
+
+
   <update id="update_readhit" parameterType="int">
     UPDATE board SET b_view_cnt = b_view_cnt + 1 WHERE b_idx = #{b_idx}
   </update>
@@ -83,6 +89,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         #{e_name}
     )
 </insert>
+
+ <update id="update" parameterType="BoardVo">
+      update board set b_title=#{b_title},
+                       b_contents=#{b_contents},
+                     
+                       b_update_date=sysdate
+      where b_idx=#{b_idx}                 
+  </update>
+
+    <update id="delete" parameterType="int">
+    delete board where b_idx=#{b_idx}
+ </update>
 
 
 </mapper>

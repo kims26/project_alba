@@ -20,5 +20,13 @@ public interface BoardDao {
       int selectRowTotal(Map<String, Object> map);
 
       int update_readhit(int b_idx);
+
+      BoardVo selectOne(int b_idx);
+
+      // int selectComment(int b_idx);
+     
+      int update(BoardVo vo);
+
+      int delete(int b_idx);
     
 }
