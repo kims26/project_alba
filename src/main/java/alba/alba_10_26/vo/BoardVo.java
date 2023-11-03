@@ -15,5 +15,5 @@ public class BoardVo {
     int b_view_cnt;
     int e_idx;
     String e_name;
-    
+    int c_idx;
 }
