@@ -192,6 +192,42 @@ section.notice {
   height: 1px;
 }
 
+.center-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+        }
+
+        #b_title {
+            width: 60%;
+        }
+
+        #b_contents {
+            height: 300px;
+        }
+
+        /* 이미지 스타일을 추가합니다 */
+        .page-title img {
+            width: 250px; /* 이미지의 너비를 조절합니다 */
+            height: 20px; /* 이미지의 높이를 조절합니다 */
+        }
+
+        .search-wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .form-select {
+        width: 33%;
+    }
+    
+    .btn {
+        width: 33%;
+    }
+
     </style>
     <script>
         function insert_form() {
@@ -239,50 +275,63 @@ section.notice {
 <%@ include file="../main/header.jsp" %>
 
 <section class="notice">
+
     <div class="page-title">
-          <div class="container">
-              <h3>게 시 판</h3>
-          </div>
-      </div>
+        <div class="container" style="position: relative; text-align: center;">
+            <!-- 이미지를 추가합니다 -->
+            <img src="../images/post.png" alt="게시판 이미지" style="width: 70%; height: auto; display: inline-block;">
+            <h3 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">게&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;시&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;판</h3>
+        </div>
+    </div>
+    
+    
   
       <!-- board seach area -->
       <div id="board-search">
-          <div class="container">
-              <div class="search-window">
-                  <form action="">
-                      <div class="search-wrap">
-                        <!-- <label for="searchType" class="form-label">검색 유형:</label> -->
-                        <select id="searchType" name="searchType" class="form-select">
+        <div class="container">
+            <div class="search-window">
+                <form action="">
+                    <div class="search-wrap" style="display: flex; justify-content: space-between; align-items: center;">
+                        <select id="search_text" name="searchType" class="form-select" style="width: 40%; margin-right: 10px;">
                             <option value="all">전체</option>
                             <option value="e_name">이름</option>
                             <option value="b_title">제목</option>
                             <option value="b_contents">내용</option>
                             <option value="e_name_e_subject_e_content">이름+제목+내용</option>
                         </select>
-                          <input id="search_text"  type="search" name="search_text" placeholder="검색어를 입력해주세요." value="${param.search_text}">
-                          <button type="submit" class="btn btn-dark" onclick="search_f()">검색</button>
-                      </div>
-                  </form>
-              </div>
-          </div>
-      </div>
+                        <input id="search_text" type="search" name="search_text" style="width: 40%; height: 500%; margin-right: 150px;" placeholder="검색어를 입력해주세요." value="${param.search_text}">
+                        <button type="submit" class="btn btn-dark" style="width: 25%; margin-left: auto;" onclick="search_f()">검색</button> 
+                     </div>
+                    
+                    
+                    <p>&nbsp;</p>
+                    <div class="text-center">
+                      <c:if test="${empty owner}">
+                        <strong><a href="../board/insert_form.do" class="btn btn-dark text-white">게시물 등록하기</a></strong>
+                      </c:if>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+      
       <div id="board-list">
           <div class="container">
               <table class="board-table">
+                <p>&nbsp;</p>
                   <thead>
                     <thead>
                         <tr>
-                            <th scope="col">번호</th>
-                            <th scope="col">내용</th>
-                            <th scope="col">작성자</th>
-                            <th scope="col">작성일자</th>
+                            <th scope="col">번 호</th>
+                            <th scope="col">제 목</th>
+                            <th scope="col">작 성 자</th>
+                            <th scope="col">작 성 일 자</th>
                         </tr>
                     </thead>
                   </thead>
 
-                  <p>
-                     <a href="../board/insert_form.do" class="btn btn-primary-1">게시물 등록하기</a>
-                    </p>
+                  
                
                   <tbody>
                     

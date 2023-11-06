@@ -51,7 +51,6 @@ public class OwnerController {
 
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		map.put("result", bResult);
-
 		return map;
 	}
 
@@ -98,7 +97,6 @@ public class OwnerController {
 		int res = ownerDao.insertOwner(vo);
 		if (res == 0) {
 		}
-
 		return "redirect:login_form.do";
 	}
 
@@ -151,12 +149,11 @@ public class OwnerController {
 			bResult = true;
 		else
 			bResult = false;
-
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		map.put("result", bResult);
-
 		return map;
 	}
+
 
 	@RequestMapping("/owner/modify_form.do")
 	public String modify_form(int o_idx, Model model) {

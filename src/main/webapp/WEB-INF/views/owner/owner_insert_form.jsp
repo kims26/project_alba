@@ -14,43 +14,90 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script type="text/javascript">
 
+    function changePhone1(){
+        const phone1 = document.getElementById("phone1").value
+        if(phone1.length === 3) {
+            document.getElementById("phone2").focus()
+        }
+    }
+    
+    function changePhone2(){
+        const phone2 = document.getElementById("phone2").value
+        if(phone2.length === 4) {
+            document.getElementById("phone3").focus()
+        }
+    }
+    
+    function changePhone3(){
+        const phone1 = document.getElementById("phone1").value
+        const phone2 = document.getElementById("phone2").value
+        const phone3 = document.getElementById("phone3").value
+        if(phone1.length === 3 && phone2.length === 4 && phone3.length === 4){
+            //document.getElementById("token__button").style = "background-color: #FFFFFF; color: #0068FF; cursor: pointer;"
+            //document.getElementById("token__button").removeAttribute("disabled")
+            let o_tel = phone1 + '-' + phone2 + '-' + phone3;
+            document.getElementById("o_tel").value = o_tel;
+        }
+        else{
+            document.getElementById("o_tel").value = '';
+        }
+    
+    }
+    </script>
+
+
+<script type="text/javascript">
+    
+    function find_addr(){
+	 
+	 new daum.Postcode({
+	        oncomplete: function(data) {
+	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+	            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+	            
+	            // data = {"zonecode": "12345" , "address":"서울시 관악구" ,...}
+	            
+	            $("#o_addr").val(data.zonecode);
+	            $("#o_add_addr").val(data.address);
+	            
+	            
+	        }
+	    }).open();
+	 
+ }//end:find_addr()
+
   function send(f){
           
-          //입력항목 체크(이름/비번/우편번호/주소)
-          var o_name 		= f.o_name.value.trim();
+         
+          var o_name 	= f.o_name.value.trim();
           var o_email 	= f.o_email.value.trim();
   
           var o_id = document.getElementById('o_id');
-	        var o_pwd = document.getElementById('o_pwd');
+	      var o_pwd = document.getElementById('o_pwd');
   
           var reg_id = /^[A-Za-z]{4,10}$/;
           var reg_pwd = /^[A-Za-z0-9]{6,12}$/;
   
           var o_addr 		    = f.o_addr.value.trim();
-          var o_add_addr 		= f.o_addr.value.trim();
-          var o_tel 	      = f.o_tel.value.trim();
-         
+          var o_add_addr 		= f.o_add_addr.value.trim();
+          var o_tel 	        = f.o_tel .value.trim();
         
-          
           if(o_name==''){
               alert('이름을 입력하세요!!');
               f.o_name.value='';
               f.o_name.focus();
               return false;
           }
-  
           if(o_email==''){
               alert('이메일을 입력하세요!!');
               f.o_email.value='';
               f.o_email.focus();
               return false;
           }
-  
-  
           if(o_id==''){
               alert('아이디를 입력하세요!!');
               f.o_id.value='';
@@ -63,8 +110,6 @@
             f.o_id.focus();
             return;
           }
-  
-          
           if(o_pwd==''){
               alert('비밀번호를 입력하세요!!');
               f.o_pwd.value='';
@@ -79,7 +124,7 @@
           }
           
           if(o_addr==''){
-              alert('주소를 입력하세요!!');
+            oalert('주소를 입력하세요!!');
               f.o_addr.value='';
               f.o_addr.focus();
               return false;
@@ -103,8 +148,8 @@
               f.o_storee.focus();
               return false;
           }	 
-          f.action = "insert.do";//MemberInsertAction
-          f.submit(); //전송(제출)
+          f.action = "insert.do";
+          f.submit(); 
           
       }
   
@@ -119,14 +164,14 @@
           $("#id_message").html("*영문(소문자) 4~10자리로 입력해주세요.")
                           .css("color","red");
           
-          //회원가입버튼 비활성화
-          $("#btn_register").attr("disabled",true);//비활성화
+       
+          $("#btn_register").attr("disabled",true);
           
           return;
         }
   
   
-        //서버 : 아이디 중복체크
+  
         $.ajax({
           
           url		:	"check_o_id.do",  		
@@ -138,15 +183,15 @@
               $("#id_message").html("사용가능한 아이디 입니다.")
                                       .css("color","blue");
               
-              //회원가입버튼 활성화
-              $("#btn_register").attr("disabled",false);//활성화
+            
+              $("#btn_register").attr("disabled",false);
               
             }else{
               
               $("#id_message").html("이미 사용중인 아이디 입니다.")
                                       .css("color","red");
-              //회원가입버튼 비활성화
-              $("#btn_register").attr("disabled",true);//비활성화
+         
+              $("#btn_register").attr("disabled",true);
             }
             
             
@@ -163,26 +208,21 @@
         function check_o_pwd(){
   
           var o_pwd = $("#o_pwd").val();
-          // var regExp = /^[A-Za-z]{4,10}$/;
-          // var regExp = /^[A-Za-z0-9]{6,12}$/;
+       
   
-          // var regExp1 = /[^a-z0-9]+|^([a-z]+|[0-9]+){6,12}$/i;
           var regExp1 =/^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{6,12}$/i;
-          // var regExp1 = /^([a-z][0-9][a-z0-9]*|[0-9][a-z][a-z0-9]*){6,12}$/i;
-  
-  
+      
   
           if(regExp1.test(o_pwd)==false){
             
             $("#pwd_message").html("*영문, 숫자를 혼용하여 6~12자리로 입력해주세요.")
                     .css("color","red");
             
-            //회원가입버튼 비활성화
-            $("#btn_register").attr("disabled",true);//비활성화
+           
+            $("#btn_register").attr("disabled",true);
             
             return;
           }
-  
   
           //서버 : pwd 중복체크
           $.ajax({
@@ -196,15 +236,15 @@
                 $("#pwd_message").html("사용가능한 비밀번호 입니다.")
                         .css("color","blue");
                 
-                //회원가입버튼 활성화
-                $("#btn_register").attr("disabled",false);//활성화
+             
+                $("#btn_register").attr("disabled",false);
                 
               }else{
                 
                 $("#pwd_message").html("이미 사용중인 비밀번호 입니다.")
                         .css("color","red");
-                //회원가입버튼 비활성화
-                $("#btn_register").attr("disabled",true);//비활성화
+                
+                $("#btn_register").attr("disabled",true);
               }
               
               
@@ -217,26 +257,27 @@
           });
   
           }
-        
-        
          </script>
 
 <script type="text/javascript">
-  function check_o_pwd_confirm() {
-var password = $("#o_pwd").val();
-var confirmPassword = $("#o_pwd_confirm").val();
-
-if (password !== confirmPassword) {
- $("#re_password_error").html("비밀번호가 일치하지 않습니다.").css("color", "red");
- $("#btn_register").attr("disabled", true); // 회원가입 버튼 비활성화
-} else {
- $("#re_password_error").html("일치 완료").css("color","blue"); // 에러 메시지 초기화
- $("#btn_register").attr("disabled", false); // 회원가입 버튼 활성화
+         function check_o_pwd_confirm() {
+    var password = $("#o_pwd").val();
+    var confirmPassword = $("#o_pwd_confirm").val();
+    
+    if (password !== confirmPassword) {
+        $("#re_password_error").html("비밀번호가 일치하지 않습니다.").css("color", "red");
+        $("#btn_register").attr("disabled", true); // 회원가입 버튼 비활성화
+    } else {
+        $("#re_password_error").html("일치 완료").css("color","blue"); // 에러 메시지 초기화
+        $("#btn_register").attr("disabled", false); // 회원가입 버튼 활성화
+    }
 }
-}
-   </script>
+          </script>
+          
 
 <style type="text/css">
+
+
 
 .register {
   position: fixed;
@@ -254,29 +295,46 @@ if (password !== confirmPassword) {
   box-sizing: border-box;
 }
 
-.register-left{
-    text-align: center;
-    color: #fff;
-    margin-top: 4%;
-}
 
 .register-left input{
     border: none;
     border-radius: 1.5rem;
     padding: 2%;
-    width: 100%;
-    background: #f8f9fa;
+    width: 150%;
+    background: #4f96dd;
     font-weight: bold;
     color: #383d41;
     margin-top: 30%;
     margin-bottom: 3%;
     cursor: pointer;
 }
-.register-right{
-    background: #f8f9fa;
+
+.register-left {
+    text-align: center;
+    color: white;
+    margin-top: 4%;
+    width: 40%; /* 원하는 너비로 조절 */
+    height: 900px; /* 원하는 높이로 조절 */
+    transform: translate(0, 20%); /* 수직 중앙에 위치 */
+}
+
+.register-right {
+    background: white;
     border-top-left-radius: 10% 50%;
     border-bottom-left-radius: 10% 50%;
+    width: 50%;
+    height: 800px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(0, -50%);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3); /* 그림자 색상 및 투명도 조절 */
+    outline: 1px solid rgba(0, 0, 0, 0.2); /* 아웃라인 색상 및 투명도 조절 */
 }
+
+
+
+
 .register-left img{
     margin-top: 15%;
     margin-bottom: 5%;
@@ -316,7 +374,7 @@ if (password !== confirmPassword) {
     cursor: pointer;
 }
 
-.btnRegister-1{
+.btnRegister-1 {
     float: right;
     margin-top: 10%;
     border: none;
@@ -324,10 +382,12 @@ if (password !== confirmPassword) {
     padding: 2%;
     background: lightsteelblue;
     color: white;
-    font-weight: 600;
-    width: 100%;
+    font-weight: 1000;
+    width: 100px;
+    font-size: 20px; /* 원하는 폰트 크기로 조절 */
     cursor: pointer;
 }
+
 
 .register .nav-tabs{
     margin-top: 3%;
@@ -363,75 +423,111 @@ if (password !== confirmPassword) {
     color: #495057;
 }
 </style>
+
 </head>
 
 <body>
-  <%@ include file="../main/header.jsp" %>
-
   <div class="box">
 
   <form method="POST">
   <div class="container register">
     <div class="row">
-        <div class="col-md-3 register-left">
-            <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
-            <h3>Welcome ALBA-STAR</h3>
-            <p>가게 회원가입!</p>
-            <div  class="btnRegister-1" >
-              <a href="../main/main.do">메인가기</a>
+
+        <div class="col-md-3 register-left" style="margin-top: -150px;">
+            <div class="text-center">
+                <img src="../images/bbb.png" alt="" style="width: 100%; max-width: 450px; margin-top: -50px;">
+                <h3 style="font-size: 80px; margin-top: 100px;">Welcome ALBA-STAR</h3>
+
+                    <div class="btnRegister-1">
+                        <a href="../main/main.do"  style="font-size: 20px;">메인가기</a>
+                    </div>
             </div>
         </div>
+    
         <div class="col-md-9 register-right">
+            
             <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-
                 <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="../owner/insert_form.do" role="tab" aria-controls="home" aria-selected="true">가게</a>
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="../employee/insert_form.do" role="tab" aria-controls="home" aria-selected="true">직원</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="../employee/insert_form.do" role="tab" aria-controls="profile" aria-selected="false">직원</a>
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="../owner/insert_form.do" role="tab" aria-controls="profile" aria-selected="false">가게</a>
                 </li>
             </ul>
+
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <h3 class="register-heading">가게 회원가입</h3>
+
                     <div class="row register-form">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" name="o_name" id="o_name" placeholder="이름"   />
+                                <input type="text" class="form-control" name="o_email" id="o_email" placeholder="이메일" style="width: 300px;" />
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" value="${ param.o_id }" name="o_id" id="o_id" placeholder="아이디" onkeyup="check_o_id()" maxlength="10" />
-                                <span id="id_message" style="font-size:0.7rem ; margin-top: 0.5rem ;"></span> 
+                                <input type="text" class="form-control" name="o_name" id="o_name" placeholder="이름" style="width: 300px;" />
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" name="o_pwd" id="o_pwd" value="${ param.o_pwd }" onkeyup="check_o_pwd()" maxlength="16"  placeholder="비밀번호"/>
-                                <span id="pwd_message" style="font-size:0.7rem ; margin-top: 0.5rem ; margin-bottom: 0.5rem ;"></span> 
+                                <input type="text" class="form-control" value="${param.o_id}" name="o_id" id="o_id" placeholder="아이디" style="width: 300px;" onkeyup="check_o_id()" maxlength="10" />
+                                <span id="id_message" style="font-size: 0.7rem; margin-top: 0.5rem;"></span>
+                            </div>
+                  
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="o_pwd" id="o_pwd" value="${param.o_pwd}" onkeyup="check_o_pwd()" maxlength="16" style="width: 300px;" placeholder="비밀번호" />
+                                <span id="pwd_message" style="font-size: 0.7rem; margin-top: 0.5rem; margin-bottom: 0.5rem;"></span>
                             </div>
                             <div class="form-group">
-                              <input type="password" class="form-control" maxlength="16" name="o_pwd_confirm" id="o_pwd_confirm"  onkeyup="check_o_pwd_confirm()"  placeholder="비밀번호 확인"/>
-                              <span id="re_password_error" class="err_message" style="font-size:0.7rem ; margin-top: 0.5rem ; margin-bottom: 0.5rem ;"></span>
-                          </div>         
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="email" class="form-control" name="o_email" id="o_email" placeholder="이메일" />
-                            </div>
-                            <div class="form-group">
-                                <input type="text" minlength="10" maxlength="10" class="form-control" name="o_tel" id="o_tel" placeholder="전화번호" />
+                                <input type="password" class="form-control" maxlength="16" name="o_pwd_confirm" id="o_pwd_confirm"  style="width: 300px;" onkeyup="check_o_pwd_confirm()" placeholder="비밀번호 확인" />
+                                <span id="re_password_error" class="err_message" style="font-size: 0.7rem; margin-top: 0.5rem; margin-bottom: 0.5rem;"></span>
                             </div>
 
                             <div class="form-group">
-                              <input type="text" class="form-control" name="o_addr" id="o_addr" placeholder="주소"/>
-                          </div>
-                          <div class="form-group">
-                            <input type="text" class="form-control" name="o_add_addr" id="o_add_addr" placeholder="나머지 주소"/>
-                        </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="o_storee" id="o_storee" placeholder="가게이름"/>
+                                <label>휴대폰 번호</label>
+                                <div class="phone_box_container f_c">
+                                    <input type="hidden" name="o_tel" id="o_tel">
+                                    <div class="d-flex">
+                                        <input class="input_text input_phone" id="phone1" style="width: 90px;" type="text" onkeyup="changePhone1()" /> - 
+                                        <input class="input_text input_phone" id="phone2" style="width: 90px;" type="text" onkeyup="changePhone2()" /> - 
+                                        <input class="input_text input_phone" id="phone3" style="width: 90px;" maxlength="4" onkeyup="changePhone3()" />
+                                    </div>
+                                </div>
                             </div>
-                          <input type="submit" class="btnRegister"  id="btn_register" disabled="disabled" onclick="send(this.form)"return false; value="회원가입"/>
+                            
+                            <div class="form-group">
+                                <label>우편번호</label>
+                                <div class="d-flex">
+                                    <input class="form-control" style="width: 300px;" name="o_addr" id="o_addr">
+                                    <input class="btn btn-info" type="button" style="font-sioe: 1.5 rem;omargin-top: 0.5rem;" value="검색" onclick="find_addr();" />
+                                </div>
+                            </div>
+                            
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="o_add_addr" id="o_add_addr" style="width: 300px;" placeholder="나머지 주소" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="o_storee" id="o_storee" style="width: 300px;" placeholder="가게이름" />
+                            </div>
+                            
                         </div>
+
                     </div>
+                    <!-- <div class="row register-form">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>우편번호 </label>
+                                <input class="form-control" style="width: 280px;" name="o_addr" id="o_addr">
+                                <input class="btn btn-info" type="button" value="검색" ooclick="findoaddr();" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="o_add_addr" id="o_add_addr" style="width: 280px;" placeholder="나머지 주소" />
+                            </div>
+
+                            <input type="submit" class="btnRegister" id="btn_register" style="width: 280px;" disabled="disabled" onclick="send(this.form); return false;" value="회원가입" />
+                        </div>
+                    </div> -->
+                    
+
                 </div>
             </div>
         </div>
