@@ -35,6 +35,21 @@ public class EmployeeController {
 		this.employeeDao = employeeDao;
 	}
 
+	@RequestMapping("/employee/insert_form.do")
+	public String insert_form() {
+
+		return "employee/employee_insert_form";
+	}
+
+    @RequestMapping("/employee/insert.do")
+	public String insert(EmployeeVo vo) {
+
+		int res = employeeDao.insertEmployee(vo);
+		if (res == 0) {
+		}
+
+		return "redirect:login_form.do";
+	}
 
 	@RequestMapping(value = "/employee/check_e_id.do", produces = "application/json;charset=utf-8;")
 	@ResponseBody
@@ -54,7 +69,7 @@ public class EmployeeController {
 		return map;
 	}
 
-
+	
 	@RequestMapping(value = "/employee/check_pwd.do", produces = "application/json;charset=utf-8;")
 	@ResponseBody
 	public Map<String, Boolean> check_pwd(String e_pwd) {
@@ -85,22 +100,7 @@ public class EmployeeController {
 
    
 
-    @RequestMapping("/employee/insert_form.do")
-	public String insert_form() {
-
-		return "employee/employee_insert_form";
-	}
-
-    @RequestMapping("/employee/insert.do")
-	public String insert(EmployeeVo vo) {
-
-		int res = employeeDao.insertEmployee(vo);
-		if (res == 0) {
-		}
-
-		return "redirect:login_form.do";
-	}
-	 @RequestMapping("employee/login_form.do")
+     @RequestMapping("employee/login_form.do")
     public String login_form(){
 
         return "employee/employee_login_form";
@@ -138,23 +138,7 @@ public class EmployeeController {
 		return "redirect:../main/main.do";
 	}
 
-	@RequestMapping(value = "/employee/check_id.do", produces = "application/json;charset=utf-8;")
-	@ResponseBody
-	public Map<String, Boolean> check_id(String e_id) {
-
-		EmployeeVo vo = employeeDao.selectOneFromId(e_id);
-
-		boolean bResult;
-		if (vo == null)
-			bResult = true;
-		else
-			bResult = false;
-
-		Map<String, Boolean> map = new HashMap<String, Boolean>();
-		map.put("result", bResult);
-
-		return map;
-	}
+	
 
 
 	@RequestMapping("/employee/modify_form.do")
@@ -178,6 +162,24 @@ public class EmployeeController {
 		return "redirect:../main/main.do";
 	}
 
+
+	@RequestMapping(value = "/employee/check_id.do", produces = "application/json;charset=utf-8;")
+	@ResponseBody
+	public Map<String, Boolean> check_id(String e_id) {
+
+		EmployeeVo vo = employeeDao.selectOneFromId(e_id);
+
+		boolean bResult;
+		if (vo == null)
+			bResult = true;
+		else
+			bResult = false;
+
+		Map<String, Boolean> map = new HashMap<String, Boolean>();
+		map.put("result", bResult);
+
+		return map;
+	}
 
 
 

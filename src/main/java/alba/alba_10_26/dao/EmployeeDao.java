@@ -10,9 +10,9 @@ import alba.alba_10_26.vo.EmployeeVo;
 @Mapper
 public interface EmployeeDao {
 
-     public List<EmployeeVo> selectList();
-
      public int insertEmployee(EmployeeVo vo);
+
+     public List<EmployeeVo> selectList();
 
      public EmployeeVo selectOneFromIdx(int e_idx);
 

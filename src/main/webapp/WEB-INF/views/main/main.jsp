@@ -49,8 +49,6 @@
                                 <a href="../board/board_list.do">게시판</a>
                             </li>
 
-                           
-
                             <li><a href="../calender/list.do">일정</a></li>
 
                             <li><a href="left-sidebar.html">소통방</a></li>

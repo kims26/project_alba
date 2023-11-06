@@ -4,18 +4,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="alba.alba_10_26.dao.EmployeeDao">
 
-<select id="selectList" resultType="EmployeeVo">
-    select * from employee order by e_idx
-</select>
-
-
- <select id="selectOneFromIdx" parameterType="int"  resultType="EmployeeVo">
-     select * from employee where e_idx=#{ e_idx }
-  </select>
-  
-  <select id="selectOneFromId" parameterType="String"  resultType="EmployeeVo">
-     select * from employee where e_id=#{ e_id }
-  </select>
 
 
  <insert id="insertEmployee"  parameterType="EmployeeVo">
@@ -30,6 +18,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                               )
   
   </insert>
+
+<select id="selectList" resultType="EmployeeVo">
+    select * from employee order by e_idx
+</select>
+
+
+ <select id="selectOneFromIdx" parameterType="int"  resultType="EmployeeVo">
+     select * from employee where e_idx=#{ e_idx }
+  </select>
+  
+  <select id="selectOneFromId" parameterType="String"  resultType="EmployeeVo">
+     select * from employee where e_id=#{ e_id }
+  </select>
+
+
+
 
    <update id="update" parameterType="EmployeeVo">
     update employee set e_name=#{ e_name },

@@ -36,7 +36,7 @@
 
     <script>
 
-        let global_comment_page = 1;
+      let global_comment_page = 1;
 
       function comment_insert (){
         //로그인여부 체크
@@ -47,6 +47,7 @@
            location.href="../employee/login_form.do?url=" + encodeURIComponent(location.href);
           return;
         }
+
 
         let c_comment = $("#c_comment").val();
 
@@ -145,7 +146,6 @@
       }
 
     </script>
-
 <script>
     //현재 html문서 배치가 완료되면 게시판목록 출력
     $(document).ready(function(){
@@ -162,8 +162,6 @@
     
     <div class="container mt-5">
         <input type="hidden" value="${vo.b_idx}" id="b_idx">
-        
-       
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <table class="table">
@@ -182,7 +180,6 @@
                     <textarea id="b_contents" name="b_contents" class="form-control" rows="5" disabled >${ vo.b_contents }</textarea>
                 </div>
                 <br>
-
                 <p> 
                     <c:if test="${ member.e_idx eq vo.e_idx }">
                         <input type="button" value="수정" onclick="location.href='modify_form.do?b_idx=${ vo.b_idx }&page=${param.page}&search=${param.search}&search_text=${param.search_text}'">
@@ -190,12 +187,8 @@
                        <input type="button" value="삭제" onclick="del('${vo.b_idx}');">
                     </c:if>
                 </p>
-
             </div>
-            
-            
         </div>
-        
         <!-- <textarea id="c_comment" placeholder="댓글은 로그인후에 작성 가능합니다"></textarea> -->
         <div class="row">
             <div class="col-md-8 offset-md-2">
@@ -204,17 +197,16 @@
                         <div class="col-md-9">
 
                             <label for="articleComment" hidden>댓글</label>
+                            <c:if test="${empty owner}">
                             <textarea class="form-control" id="c_comment" placeholder="댓글은 로그인후에 작성 가능합니다" rows="3"
                                 required></textarea>
+                            </c:if>
+
                         </div>
-
                         <div class="col-md-3">
-                            <!-- <label for="comment-submit" hidden>댓글 쓰기</label> -->
-                            <!-- <input id="comment_btn" class="btn btn-primary" type="button" value="댓글쓰기"
-                                                            onclick="comment_insert();"> -->
-                         <input id="comment_btn1" class="btn btn-primary" type="button" value="댓글쓰기" onclick="comment_insert();">
-
-
+                            <c:if test="${empty owner}">
+                                <input id="comment_btn1" class="btn btn-primary" type="button" value="댓글쓰기" onclick="comment_insert();">
+                             </c:if>
                         </div>
 
                     </div>
@@ -225,31 +217,6 @@
             </div>
         </div>
 
-        <!-- <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <ul id="article-comments" class="pt-3">
-                    <li>
-
-                        <form>
-                            <input hidden class="article-id">
-                            <div class="row">
-                                <div class="row col-md-10">
-                                    <strong>Jyc</strong>
-                                    <small>
-                                        <time>2022-01-01</time>
-                                    </small>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
-                                        Lorem ipsum dolor sit amet
-                                    </p>
-                                </div>
-                            </div>
-                        </form>
-
-                    </li>
-                </ul>
-            </div>
-        </div> -->
 
         <div class="container mt-4">
             <div class="d-flex justify-content-center">
